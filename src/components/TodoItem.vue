@@ -10,7 +10,7 @@
       </a>
     </div>
     <div class="valign-wrapper">
-      <p class="col s10 m10 l10 todo_text">{{ todo.text }}</p>
+      <p class="col s10 m10 l10 todo_text"><span class="counter">{{ todoIndex+1 }}.</span> {{ todo.text }}</p>
       <div class="col s2 m1 l1 btn-container">
         <a class="btn btn-floating btn-small waves-effect waves-light red" @click="removeTodo">
           <i class="material-icons">delete</i>
@@ -23,7 +23,7 @@
 <script>
 export default {
   name: "todo-item",
-  props: ["todo"],
+  props: ["todo", "todoIndex"],
   data() {
     return {};
   },
@@ -61,5 +61,7 @@ export default {
 }
 .done-icon {
   color: black;
+  transition: background-color 0.5s ease;
 }
+
 </style>

@@ -7,14 +7,16 @@
     </nav>
     <div class="container">
       <todo-input class="todo-input" @todo:add="addTodo"/>
+      <todo-sort @todo:sort="sort"/>
       <div class="content">
         <draggable v-model="todos" ghost-class="ghost" group="tasks">
           <transition-group type="transition" name="flip-list">
             <todo-item
-              v-for="todo in todos"
+              v-for="(todo, index) in visibleTodos"
               class="sortable"
               :class="{'done': todo.done}"
               :todo="todo"
+              :todoIndex="index"
               @todo:remove="removeTodo"
               @todo:done="doneTodo"
               :key="todo.id"
@@ -31,6 +33,7 @@ import todoHeader from "./components/TodoHeader.vue";
 import todoInput from "./components/TodoInput.vue";
 import todoItem from "./components/TodoItem.vue";
 import draggable from "vuedraggable";
+import todoSort from "./components/TodoSort.vue"
 
 export default {
   name: "App",
@@ -38,12 +41,14 @@ export default {
     todoHeader,
     todoInput,
     todoItem,
-    draggable
+    draggable,
+    todoSort
   },
   data() {
     return {
       todos: [],
       visibleTodos: [],
+      viewAll: true,
       nextId: 1
     };
   },
@@ -56,7 +61,7 @@ export default {
       handler(todosArr) {
         localStorage.setItem("todos", JSON.stringify(todosArr));
         localStorage.setItem("nextId", JSON.stringify(this.nextId));
-        this.visibleTodos = todosArr;
+        this.visibleTodos = this.viewAll ? this.todos : this.todos.filter(el => !el.done);
       },
       deep: true
     }
@@ -81,7 +86,14 @@ export default {
       if (storageTodos !== null) {
         this.todos = JSON.parse(storageTodos);
         this.nextId = JSON.parse(storageNextId);
-        console.log("load");
+      }
+    },
+    sort(status) {
+      this.viewAll = status;
+      if(status) {
+        this.visibleTodos = this.todos;
+      } else {
+        this.visibleTodos = this.todos.filter(el => !el.done);
       }
     }
   }
