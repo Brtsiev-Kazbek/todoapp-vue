@@ -1,5 +1,7 @@
 # todoapp-vue
 
+## My Trining Project
+
 ## Project setup
 ```
 npm install
