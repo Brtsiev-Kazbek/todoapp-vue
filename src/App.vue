@@ -9,7 +9,7 @@
       <todo-input class="todo-input" @todo:add="addTodo"/>
       <todo-sort @todo:sort="sort"/>
       <div class="content">
-        <draggable v-model="todos" ghost-class="ghost" group="tasks">
+        <draggable v-model="todos" ghost-class="ghost" group="tasks" handle=".handle">
           <transition-group type="transition" name="flip-list">
             <todo-item
               v-for="(todo, index) in visibleTodos"
