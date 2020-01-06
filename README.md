@@ -1,5 +1,6 @@
 # todoapp-vue
-### [Try it] (brtsiev-kazbek.github.io/todoapp-vue/)
+
+## [Try it](https://brtsiev-kazbek.github.io/todoapp-vue/)
 
 ## My Trining Project
 
