@@ -2,7 +2,7 @@
 
 ## [Try it](https://brtsiev-kazbek.github.io/todoapp-vue/)
 
-## My Trining Project
+## My training project
 
 ## Project setup
 ```
